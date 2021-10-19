@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include "Eigen/Dense"
 
 using namespace std;
 
