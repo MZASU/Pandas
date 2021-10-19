@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    cout << "Hello, World!" << endl;
+    cout << "Welcome to Pandas!" << endl;
 
     return EXIT_SUCCESS;
 }
