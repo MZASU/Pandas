@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "io/FileReader.h"
+#include "./io/FileReader.h"
 
 using namespace std;
 
@@ -17,7 +17,10 @@ int main()
 {
     cout << "Welcome to Pandas!" << endl;
 
-    
+    FileReader f("mnist.image", DATATYPE::IMAGE);
 
+    f.draw();
+
+    std::cout << std::endl;
     return EXIT_SUCCESS;
 }
