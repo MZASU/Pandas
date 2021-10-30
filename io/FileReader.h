@@ -7,15 +7,14 @@
 
 /* Class that reads MNIST database */
 
-enum class DATATYPE {IMAGE, LABEL};
 
 class FileReader
 {
 private:
-    DATATYPE type;
-    std::ifstream file;
+    std::ifstream images;
+    std::ifstream labels;
 public:
-    FileReader(std::string path, DATATYPE t);
+    FileReader(std::string path);
     ~FileReader();
     void draw(); // testing purpose
     void read();

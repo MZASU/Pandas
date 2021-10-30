@@ -2,57 +2,49 @@
 #include <iostream>
 #include <cassert>
 
-FileReader::FileReader(std::string path, DATATYPE t)
+// path:  "" means same dir, otherwise the expected input would be, "io/" if you were to put the data in the io folder
+FileReader::FileReader(std::string path)
 {
-    assert(path.length() > 0);
+    this->images.open(path + "mnist.image", std::ifstream::binary);
 
-    this->type = t;
-    this->file.open(path, std::ifstream::binary);
-
-    assert(file.good() == true);
-    assert(file.is_open() == true);
+    assert(images.good() == true);
+    assert(images.is_open() == true);
 
     // longueur du fichier
-    file.seekg(0, file.end);
-    uint32_t l = file.tellg();
-    std::cout << "length = " << l << std::endl;
+    images.seekg(0, images.end);
+    uint32_t l = images.tellg();
     assert(l > 0);
 
-    if(type == DATATYPE::IMAGE)
-    {
-        file.seekg(16, file.beg);
-        this->image.resize(28*28);
-    }
-    else if(type == DATATYPE::LABEL)
-    {
-        file.seekg(8, file.beg);
-    }
-    
-}
+    images.seekg(16, images.beg);
+    this->image.resize(28*28);
 
-FileReader::~FileReader()
-{
+    this->labels.open(path + "mnist.label", std::ifstream::binary);
+
+    assert(labels.good() == true);
+    assert(labels.is_open() == true);
+
+    // longueur du fichier
+    labels.seekg(0, labels.end);
+    l = labels.tellg();
+    assert(l > 0);
+
+    labels.seekg(8, labels.beg);
 }
 
 void FileReader::read()
 {
-    if(file.eof() == true) return;
-
-    if(type == DATATYPE::LABEL)
-    {
-        uint8_t c;
-        file.get((char&)c);
-        this->label = c;
-        return;
-    }
-    assert(this->type == DATATYPE::IMAGE);
+    if(images.eof() == true) return;
 
     uint8_t c;
+    labels.get((char&)c);
+    this->label = c;
+    
+    c = 0;
     for(int i = 0; i < 28; i++)
     {
         for(int j = 0; j < 28; j++)
         {
-            file.get((char&)c);
+            images.get((char&)c);
             this->image(i*28+j) = (int)c;
         }
     }
@@ -77,3 +69,6 @@ void FileReader::draw()
 
 }
 
+FileReader::~FileReader()
+{
+}

@@ -17,10 +17,12 @@ int main()
 {
     cout << "Welcome to Pandas!" << endl;
 
-    FileReader f("mnist.image", DATATYPE::IMAGE);
+    FileReader f("");
 
     f.read();
-    f.draw();
+    //f.draw();
+
+    
 
     std::cout << std::endl;
     return EXIT_SUCCESS;
