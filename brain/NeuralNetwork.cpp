@@ -67,6 +67,57 @@ void NeuralNetwork::train(int ER)
     }
 }
 
+vector<VectorXd> NeuralNetwork::calculateError(VectorXd ex)
+{
+    // calcul ∂C / ∂A
+    vector<VectorXd> backprop;
+    backprop.resize(layers.size());
+
+    int last_layer = layers.size() - 1;
+    VectorXd tmp = 2*(layers.at(last_layer).ACTIVATION_VALUES - ex); // 2(Aj - Yj)
+    backprop.at(last_layer) = tmp;
+
+    for(int layer = last_layer-1; layer >= 0; layer--)
+    {
+        VectorXd layer_err;
+        layer_err.resize(layers.at(layer).size);
+
+        for(int neuron = 0; neuron < layers.at(layer).size; neuron++)
+        {       // sum(w * sig' * ∂C / ∂(A-1)) calculer l'erreur de chaque neurons
+            VectorXd tmp_col = layers.at(layer+1).WEIGHTS.col(neuron);
+            VectorXd tmp_z = sigmoidPrime(layers.at(layer).Z_VALUES);
+            VectorXd tmp_a = backprop.at(layer+1);
+            layer_err(neuron) = (tmp_col.array() * tmp_z.array() * tmp_a.array()).sum();
+        }
+        backprop.at(layer) = layer_err;
+    }
+
+    return backprop;
+}
+
+double NeuralNetwork::sigmoid(double x)
+{
+    return 1 / (1 + exp(-x));
+}
+
+double NeuralNetwork::sigmoidPrime(double x)
+{
+	return sigmoid(x) * (1 - sigmoid(x));
+}
+
+VectorXd NeuralNetwork::sigmoidPrime(VectorXd x)
+{
+	VectorXd res;
+	res.resize(x.rows());
+
+	for (size_t i = 0; i < x.rows(); i++)
+	{
+		res(i) = sigmoidPrime(x(i));
+	}
+
+	return res;
+}
+
 NeuralNetwork::~NeuralNetwork()
 {
 
