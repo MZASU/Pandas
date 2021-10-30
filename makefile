@@ -2,7 +2,7 @@ FLAGS   = -Wall
 
 DIRS = io brain
 
-SOURCES = ${wildcard *.cpp}
+SOURCES = $(wildcard *.cpp)
 OBJS	= $(patsubst %.cpp,%.o,${SOURCES})
 
 OBJ_DIR = .obj
@@ -16,7 +16,7 @@ faire: compile link
 .PHONY: do_others ${DIRS}
 
 link:
-	@g++ ${FLAGS} ${wildcard ${OBJ_DIR}/*.o} -o main.out
+	@g++ ${FLAGS} $(wildcard ${OBJ_DIR}/*.o) -o main.out
 
 do_others: ${DIRS}
 

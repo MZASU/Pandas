@@ -1,6 +1,6 @@
 FLAGS   = -Wall 
 
-SOURCES = ${wildcard *.cpp}
+SOURCES = $(wildcard *.cpp)
 OBJS	= $(patsubst %.cpp,%.o,${SOURCES})
 
 OBJ_DIR = ../.obj
