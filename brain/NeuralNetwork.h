@@ -11,10 +11,13 @@ using std::vector;
 class NeuralNetwork
 {
 private:
+    int input_size;
 
     vector<Layer> layers;
     VectorXd inputs;
     VectorXd outputs;
+
+    vector<VectorXd> calculateError(VectorXd);
 
     double sigmoid(double);
     double sigmoidPrime(double);
