@@ -1,4 +1,4 @@
-FLAGS   = -Wall 
+FLAGS   = -Wall -O3
 
 DIRS = ../io ../brain
 
@@ -9,8 +9,11 @@ OBJ_DIR = ../.obj
 
 .DEFAULT_GOAL = faire
 
+debug: FLAGS += -g 
+debug: faire
+
 faire: ${OBJS}
 
 ${OBJS} : %.o : %.cpp
-	@g++ $(addprefix -I ,${DIRS}) ${FLAGS} -c $< -o ${OBJ_DIR}/$@
+	@g++ $(addprefix -I ,${DIRS}) $(FLAGS) -c $< -o ${OBJ_DIR}/$@
 	@echo "Compilation de " $@

@@ -1,4 +1,4 @@
-FLAGS   = -Wall 
+FLAGS   = -Wall -O3
 
 DIRS = io brain
 
@@ -9,6 +9,9 @@ OBJ_DIR = .obj
 
 .DEFAULT_GOAL = faire
 
+debug: FLAGS += -g 
+debug: faire
+
 compile: do_main do_others
 
 faire: compile link
@@ -16,7 +19,7 @@ faire: compile link
 .PHONY: do_others ${DIRS}
 
 link:
-	@g++ ${FLAGS} $(wildcard ${OBJ_DIR}/*.o) -o main.out
+	@g++ $(FLAGS) $(wildcard ${OBJ_DIR}/*.o) -o main.out
 
 do_others: ${DIRS}
 
@@ -27,6 +30,6 @@ do_main: ${OBJS}
 
 
 ${OBJS} : %.o : %.cpp
-	@g++ $(addprefix -I ,${DIRS}) ${FLAGS} -c $< -o ${OBJ_DIR}/$@
+	@g++ $(addprefix -I ,${DIRS}) $(FLAGS) -c $< -o ${OBJ_DIR}/$@
 	@echo "Compilation de " $@
 

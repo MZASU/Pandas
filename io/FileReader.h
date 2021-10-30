@@ -20,6 +20,6 @@ public:
     void read();
 
     uint8_t label;
-    Eigen::VectorXd image;
+    Eigen::Matrix<double, 784, 1> image;
 
 };

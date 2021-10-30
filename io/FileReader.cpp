@@ -16,7 +16,6 @@ FileReader::FileReader(std::string path)
     assert(l > 0);
 
     images.seekg(16, images.beg);
-    this->image.resize(28*28);
 
     this->labels.open(path + "mnist.label", std::ifstream::binary);
 
