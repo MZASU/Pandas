@@ -9,19 +9,19 @@ OBJ_DIR = .obj
 
 .DEFAULT_GOAL = faire
 
+compile: do_main do_others
+
 faire: compile link
+
+.PHONY: do_others ${DIRS}
 
 link:
 	@g++ ${FLAGS} ${wildcard ${OBJ_DIR}/*.o} -o main.out
 
-compile: do_others do_main
+do_others: ${DIRS}
 
-do_others:         
-		@for dir in $(DIRS); do \
-          make -C $$dir; \
-        done
-
-
+${DIRS}:
+	@make -C $@
 
 do_main: ${OBJS} 
 
