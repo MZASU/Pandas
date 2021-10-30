@@ -19,6 +19,7 @@ int main()
 
     FileReader f("mnist.image", DATATYPE::IMAGE);
 
+    f.read();
     f.draw();
 
     std::cout << std::endl;
