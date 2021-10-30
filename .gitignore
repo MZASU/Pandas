@@ -3,3 +3,4 @@ Eigen/
 .vscode/
 .git/
 mnist.*
+.obj/
