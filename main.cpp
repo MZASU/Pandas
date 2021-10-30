@@ -22,7 +22,7 @@ int main()
     f.read();
     //f.draw();
 
-    
+
 
     std::cout << std::endl;
     return EXIT_SUCCESS;
