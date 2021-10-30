@@ -7,7 +7,7 @@ FileReader::FileReader(std::string path, DATATYPE t)
     assert(path.length() > 0);
 
     this->type = t;
-    this->file.open(path);
+    this->file.open(path, std::ifstream::binary);
 
     assert(file.is_open() == true);
 
