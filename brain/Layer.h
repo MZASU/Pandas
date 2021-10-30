@@ -6,8 +6,11 @@
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
+class NeuralNetwork;
+
 class Layer
 {
+    friend class NeuralNetwork;
 private:
     int previous_layer_size;
     int size;

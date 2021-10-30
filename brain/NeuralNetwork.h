@@ -25,6 +25,8 @@ private:
 
 public:
     
+    double learning_rate = 0.01f;
+
     NeuralNetwork(vector<int>);
     ~NeuralNetwork();
 
