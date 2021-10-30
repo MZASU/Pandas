@@ -3,8 +3,8 @@
 #include "../Eigen/Dense"
 #include <vector>
 
-typedef Eigen::MatrixXd MatrixXd;
-typedef Eigen::VectorXd VectorXd;
+using Eigen::MatrixXd;
+using Eigen::VectorXd;
 
 class Layer
 {
