@@ -1,7 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "./io/FileReader.h"
+#include "FileReader.h"
+#include "NeuralNetwork.h"
 
 using namespace std;
 

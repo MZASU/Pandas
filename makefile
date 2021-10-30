@@ -25,7 +25,8 @@ ${DIRS}:
 
 do_main: ${OBJS} 
 
+
 ${OBJS} : %.o : %.cpp
-	@g++ ${FLAGS} -c $< -o ${OBJ_DIR}/$@
+	@g++ $(addprefix -I ,${DIRS}) ${FLAGS} -c $< -o ${OBJ_DIR}/$@
 	@echo "Compilation de " $@
 

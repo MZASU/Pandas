@@ -1,1 +1,0 @@
-enum class LAYOUT {FNN, TODO};

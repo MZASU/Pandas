@@ -1,19 +1,17 @@
 #pragma once 
 
-#include "../io/FileReader.h"
-#include "types.h"
+#include "FileReader.h"
+#include <vector>
 
 class NeuralNetwork
 {
 private:
-    LAYOUT layout;
-    
-       
+         
 
 public:
     
-NeuralNetwork(/* args */);
+    NeuralNetwork(std::vector<int>);
+    ~NeuralNetwork();
 
-~NeuralNetwork();
 };
 

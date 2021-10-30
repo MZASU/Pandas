@@ -1,9 +1,11 @@
 #include "NeuralNetwork.h"
 
-NeuralNetwork::NeuralNetwork(/* args */)
+NeuralNetwork::NeuralNetwork(std::vector<int>)
 {
+
 }
 
 NeuralNetwork::~NeuralNetwork()
 {
+    
 }
