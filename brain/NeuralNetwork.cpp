@@ -10,6 +10,11 @@ NeuralNetwork::NeuralNetwork(std::vector<int> sizes)
     }
 }
 
+int NeuralNetwork::input(VectorXd in)
+{
+    this->inputs = in;
+}
+
 NeuralNetwork::~NeuralNetwork()
 {
 

@@ -20,6 +20,6 @@ public:
     void read();
 
     uint8_t label;
-    Eigen::VectorXi image;
+    Eigen::VectorXd image;
 
 };

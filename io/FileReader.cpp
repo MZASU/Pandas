@@ -45,7 +45,7 @@ void FileReader::read()
         for(int j = 0; j < 28; j++)
         {
             images.get((char&)c);
-            this->image(i*28+j) = (int)c;
+            this->image(i*28+j) = (double)c;
         }
     }
 }
