@@ -8,6 +8,6 @@ If you want more info and want to understand my code, i tried to put as much exp
 
 ### Data
 
-I built this exact program using the -O3 parameters. I then ran it over 1000000 trainings. It took 22m40s. Here is a graph of Success rate (in percent) over trials (in 1000)
+I built this exact program using the -O3 parameters. I then ran it over 1000000 trainings. It took 22m40s. Here is a graph of Success rate (in percent) over trials (in 1000). I'm 99% sure i didn't implement momentum correctly so i guess that's the reason i'm getting 95% correct after 1million trainings.
 
 ![data](.images/image1.png)

@@ -12,11 +12,14 @@ class NeuralNetwork;
 
 class Layer
 {
+    // we say that the NeuralNetwork classe can access our private data
     friend class NeuralNetwork;
 private:
+    // stores it for clarity of code 
     int previous_layer_size;
     int size;
 
+    // self explanetory
     MatrixXd WEIGHTS;
     VectorXd BIASES;
     VectorXd Z_VALUES;
@@ -28,7 +31,8 @@ public:
     Layer(int size, int psize);
     ~Layer();
 
+    // gets as input the array of the previous layer's activation function 
     void forwardPass(VectorXd values);
 
-    //operators TODO
+    //operators to save network TODO
 };
