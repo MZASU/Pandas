@@ -33,6 +33,15 @@ void MNISTReader::read()
 {
     if(images.eof() == true) return;
 
+    int64_t t = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+	std::default_random_engine engine;
+	engine.seed(t);
+	std::uniform_int_distribution<unsigned int> distribution(0, 60000);
+    
+    unsigned int pos = distribution(engine);
+    labels.seekg(8+pos, labels.beg);
+    images.seekg(16+((28*28)*pos), images.beg);
+
     uint8_t c;
     labels.get((char&)c);
     this->label = c;
