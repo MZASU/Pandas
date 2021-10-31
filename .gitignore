@@ -2,3 +2,9 @@
 Eigen/
 .vscode/
 .git/
+mnist.*
+.obj/
+memo.md
+log.txt
+stats.csv
+.directory
