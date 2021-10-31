@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include <fstream>
 
 #include "MNISTReader.h"
 #include "NeuralNetwork.h"
@@ -19,6 +20,9 @@ int main()
 {
     cout << "Welcome to Pandas!" << endl;
 
+    ofstream stats;
+    stats.open("stats.csv", ifstream::trunc);
+    
     MNISTReader f("");
 
     // f.read();
@@ -39,7 +43,7 @@ int main()
     NeuralNetwork nn(layers);  
 
     int good = 0;
-    int numb = 100000;
+    int numb = 1000000;
 
     for(int i = 0; i < numb; i++)
     {
@@ -47,11 +51,18 @@ int main()
         int res = nn.input(f.image);
         if(res == f.label) good++;
         nn.train(f.label);
+        if(i%1000 == 0)
+        {
+            stats << i << "," << good << "," << numb << endl;
+            cout << i << endl;
+        }
     }
+    stats << numb << "," << good << "," << numb << endl;
 
     cout << "Fini!" << endl;
     cout << good << "/" << numb << "(" << (good/(numb*1.0f))*100.0f << ")" << endl;
 
+    stats.close();
 
     std::cout << std::endl;
     return EXIT_SUCCESS;

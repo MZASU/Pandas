@@ -37,7 +37,7 @@ void MNISTReader::read()
 	std::default_random_engine engine;
 	engine.seed(t);
 	std::uniform_int_distribution<unsigned int> distribution(0, 60000);
-    
+
     unsigned int pos = distribution(engine);
     labels.seekg(8+pos, labels.beg);
     images.seekg(16+((28*28)*pos), images.beg);
@@ -59,4 +59,6 @@ void MNISTReader::read()
 
 MNISTReader::~MNISTReader()
 {
+    images.close();
+    labels.close();
 }
