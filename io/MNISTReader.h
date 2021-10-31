@@ -8,15 +8,14 @@
 /* Class that reads MNIST database */
 
 
-class FileReader
+class MNISTReader
 {
 private:
     std::ifstream images;
     std::ifstream labels;
 public:
-    FileReader(std::string path);
-    ~FileReader();
-    void draw(); // testing purpose
+    MNISTReader(std::string path);
+    ~MNISTReader();
     void read();
 
     uint8_t label;

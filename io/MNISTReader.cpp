@@ -1,9 +1,8 @@
-#include "FileReader.h"
-#include <iostream>
+#include "MNISTReader.h"
 #include <cassert>
 
 // path:  "" means same dir, otherwise the expected input would be, "io/" if you were to put the data in the io folder
-FileReader::FileReader(std::string path)
+MNISTReader::MNISTReader(std::string path)
 {
     this->images.open(path + "mnist.image", std::ifstream::binary);
 
@@ -30,7 +29,7 @@ FileReader::FileReader(std::string path)
     labels.seekg(8, labels.beg);
 }
 
-void FileReader::read()
+void MNISTReader::read()
 {
     if(images.eof() == true) return;
 
@@ -49,25 +48,6 @@ void FileReader::read()
     }
 }
 
-void FileReader::draw()
-{   
-    for(int i = 0; i < 28; i++)
-    {
-        for(int j = 0; j < 28; j++)
-        {
-            if(this->image(i*28+j) > 128 )
-            {
-                std::cout << "8";
-            }else
-            {
-                std::cout << " ";
-            }
-        }
-        std::cout << std::endl;
-    }
-
-}
-
-FileReader::~FileReader()
+MNISTReader::~MNISTReader()
 {
 }

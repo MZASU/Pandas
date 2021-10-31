@@ -1,6 +1,5 @@
 #pragma once 
 
-#include "FileReader.h"
 #include "Layer.h"
 #include <vector>
 
@@ -16,6 +15,7 @@ private:
     vector<Layer> layers;
     VectorXd inputs;
     VectorXd outputs;
+    int last_output = -1;
 
     vector<VectorXd> calculateError(VectorXd);
 
@@ -25,7 +25,8 @@ private:
 
 public:
     
-    double learning_rate = 0.01f;
+    double learning_rate = 0.05f;
+    double momentum = 1.0f;
 
     NeuralNetwork(vector<int>);
     ~NeuralNetwork();

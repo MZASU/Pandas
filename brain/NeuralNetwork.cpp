@@ -41,6 +41,14 @@ void NeuralNetwork::train(int ER)
     VectorXd expected = VectorXd::Zero(layers.back().size);
     expected(ER) = 1;
 
+    if(last_output == ER)
+    {
+        momentum *= 1.10f;
+    }else{
+        momentum = 1.0f;
+    }
+
+
     vector<VectorXd> erros = calculateError(expected);
 
     for(size_t layer = 0; layer < layers.size(); layer++)
@@ -62,8 +70,8 @@ void NeuralNetwork::train(int ER)
                 delta_w.row(neuron) = err_w_j.transpose();
             }
 
-            layers.at(layer).WEIGHTS -= learning_rate * delta_w;
-            layers.at(layer).BIASES -= learning_rate * delta_b;
+            layers.at(layer).WEIGHTS -= learning_rate * delta_w * momentum;
+            layers.at(layer).BIASES -= learning_rate * delta_b * momentum;
     }
 }
 

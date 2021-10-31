@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <vector>
 
-#include "FileReader.h"
+#include "MNISTReader.h"
 #include "NeuralNetwork.h"
 
 using namespace std;
@@ -19,13 +19,13 @@ int main()
 {
     cout << "Welcome to Pandas!" << endl;
 
-    FileReader f("");
+    MNISTReader f("");
 
     vector<int> layers = {28*28, 128, 128, 128, 64, 64, 32, 32, 10};
     NeuralNetwork nn(layers);  
 
     int good = 0;
-    int numb = 1000;
+    int numb = 10000;
 
     for(int i = 0; i < numb; i++)
     {
