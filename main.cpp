@@ -25,7 +25,7 @@ int main()
     NeuralNetwork nn(layers);  
 
     int good = 0;
-    int numb = 10000;
+    int numb = 1000;
 
     for(int i = 0; i < numb; i++)
     {
