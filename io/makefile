@@ -1,4 +1,4 @@
-FLAGS   = -Wall -O3
+FLAGS   = -Wall
 
 DIRS = ../io ../brain
 
@@ -11,6 +11,10 @@ OBJ_DIR = ../.obj
 
 debug: FLAGS += -g 
 debug: faire
+
+opti: FLAGS += -O3
+opti: MAKEFLAGS += opti
+opti: faire
 
 faire: ${OBJS}
 

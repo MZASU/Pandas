@@ -1,4 +1,5 @@
-FLAGS   = -Wall -O3
+FLAGS   = -Wall
+BUILDFLAGS = faire
 
 DIRS = io brain
 
@@ -10,7 +11,12 @@ OBJ_DIR = .obj
 .DEFAULT_GOAL = faire
 
 debug: FLAGS += -g 
+debug: BUILDFLAGS = debug
 debug: faire
+
+opti: FLAGS += -O3
+opti: BUILDFLAGS = opti
+opti: faire
 
 compile: do_main do_others
 
@@ -24,7 +30,7 @@ link:
 do_others: ${DIRS}
 
 ${DIRS}:
-	@make -C $@
+	@make -C $@ $(BUILDFLAGS)
 
 do_main: ${OBJS} 
 

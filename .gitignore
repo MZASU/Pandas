@@ -4,3 +4,5 @@ Eigen/
 .git/
 mnist.*
 .obj/
+memo.md
+log.txt
