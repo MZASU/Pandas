@@ -4,7 +4,7 @@
 #include <fstream>
 
 #include "MNISTReader.h"
-#include "NeuralNetwork.h"
+#include "FFNeuralNetwork.h"
 
 using namespace std;
 
@@ -48,7 +48,7 @@ int main()
     // and finally the output layer will have 10 outputs
     vector<int> layers = {28*28, 128, 128, 128, 64, 64, 32, 32, 10};
     // initialisaton of the network using our defined layers
-    NeuralNetwork nn(layers);  
+    FFNeuralNetwork nn(layers);  
 
     // counters for good guess and total trainings
     int good = 0;

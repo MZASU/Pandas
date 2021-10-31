@@ -8,12 +8,12 @@
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
-class NeuralNetwork;
+class FFNeuralNetwork;
 
 class Layer
 {
     // we say that the NeuralNetwork classe can access our private data
-    friend class NeuralNetwork;
+    friend class FFNeuralNetwork;
 private:
     // stores it for clarity of code 
     int previous_layer_size;
