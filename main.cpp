@@ -68,7 +68,7 @@ int main()
         if(i%1000 == 0)
         {
             stats << i << "," << good << "," << numb << endl;
-            cout << i << endl;
+            //cout << i << endl;
         }
     }
     stats << numb << "," << good << "," << numb << endl;
