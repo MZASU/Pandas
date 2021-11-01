@@ -1,5 +1,9 @@
 # Pandas
 
+## Presentation
+
+This repo as for goal contain the implementation of multiple type of neural networks. I intend to write it myself but i'm still open to comments, however if you want to make major changes I recommend forking the repo for yourself. Reminder that you can do absolutly whatever you like with this code.
+
 ## V1
 
 First pull on the master branch, a basic FNN work. Really nothing fancy just reads the image all layer are basic (no convolution or w/e).
