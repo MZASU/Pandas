@@ -2,10 +2,15 @@
 
 #include "Layer.h"
 #include <vector>
+#include <iostream>
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 using std::vector;
+
+// This class is a FeedForward Neural Network. It's the only one i understand so far, so i'm not creating to 'master' class that every other network configuration will 
+// inherit from since i don't know how thoses work yet however if possible. once i know them i will try and do it
+// the same thing applies to different types of layers. mine are simple layers but i've heard of convutional layer iirc, but i don't know it yet
 
 class FFNeuralNetwork
 {
@@ -45,6 +50,7 @@ public:
 
     // takes the size of each layer as input
     FFNeuralNetwork(vector<int>);
+    FFNeuralNetwork();
     ~FFNeuralNetwork();
 
     // takes the image as input
@@ -52,6 +58,10 @@ public:
 
     // takes the correct answer as input
     void train(int);
+
+    // Save&Load operators
+    friend std::ostream& operator<<(std::ostream& os, const FFNeuralNetwork& nn);
+    friend std::istream& operator>>(std::istream& is, FFNeuralNetwork& nn);
 
 };
 

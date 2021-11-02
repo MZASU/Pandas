@@ -1,5 +1,11 @@
 #include "FFNeuralNetwork.h"
 
+FFNeuralNetwork::FFNeuralNetwork()
+{
+    	// This constructor should only be called when you're trying to 
+        // load a NeuralNetwork from memory
+}
+
 FFNeuralNetwork::FFNeuralNetwork(std::vector<int> sizes)
 {
     // remembers the input size
@@ -152,6 +158,42 @@ vector<VectorXd> FFNeuralNetwork::calculateError(VectorXd ex)
     // returns to the unknown calling entity the value of the previously calculated backpropation 
     return backprop;
 }
+
+std::ostream& operator<<(std::ostream& os, const FFNeuralNetwork& nn)
+{
+    os.write((char*)&nn.learning_rate, sizeof(double));
+    os.write((char*)&nn.input_size, sizeof(int));
+    int tmp = nn.layers.size();
+    os.write((char*)&tmp, sizeof(int));
+    for(int i = 0; i < tmp; i++)
+    {
+        int _tmp = sizeof(nn.layers.at(i));
+        os.write((char*)&_tmp, sizeof(int));
+        os << nn.layers.at(i);
+    }
+    return os;
+}
+
+std::istream& operator>>(std::istream& is, FFNeuralNetwork& nn)
+{
+    is.read((char*)&nn.learning_rate, sizeof(double));
+    is.read((char*)&nn.input_size, sizeof(int));
+    int ls = 0;
+    is.read((char*)&ls, sizeof(int));
+    assert(ls > 0);
+    nn.layers.resize(ls);
+    for(int i = 0; i < ls; i++)
+    {
+        int _tmp = 0;
+        is.read((char*)&_tmp, sizeof(int));
+        assert(_tmp > 0);
+        Layer l;
+        is >> l;
+        nn.layers.at(i) = l;
+    }
+    return is;
+}
+
 
 // the next three are just single lines
 double FFNeuralNetwork::sigmoid(double x)

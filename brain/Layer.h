@@ -4,6 +4,7 @@
 #include <vector>
 #include <random>
 #include <chrono>
+#include <iostream>
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
@@ -29,10 +30,12 @@ private:
 
 public:
     Layer(int size, int psize);
+    Layer();
     ~Layer();
 
     // gets as input the array of the previous layer's activation function 
     void forwardPass(VectorXd values);
 
-    //operators to save network TODO
+    friend std::ostream& operator<<(std::ostream& os, const Layer& l);
+    friend std::istream& operator>>(std::istream& is, Layer& l);
 };

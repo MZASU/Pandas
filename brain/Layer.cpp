@@ -1,5 +1,11 @@
 #include "Layer.h"
 
+Layer::Layer()
+{
+	// This constructor should only be called in NeuralNetwork's operator>> call
+	// to be able to load a layer from a file
+}
+
 Layer::Layer(int s, int ps)
 {
 	// store
@@ -36,7 +42,7 @@ Layer::Layer(int s, int ps)
 
 void Layer::forwardPass(VectorXd in)
 {
-	// The functions you have see when you watched the 3blue1brown videos
+	// The functions you have seen when you watched the 3blue1brown videos
 
 	Z_VALUES = (WEIGHTS * in) + BIASES; 
 
@@ -44,6 +50,48 @@ void Layer::forwardPass(VectorXd in)
 	{
 		ACTIVATION_VALUES(i, 0) = sigmoid(Z_VALUES(i, 0));
 	}
+}
+
+std::ostream& operator<<(std::ostream& os, const Layer& l)
+{
+	os.write((char*)&l.size, sizeof(int));
+	os.write((char*)&l.previous_layer_size, sizeof(int));
+	for(int i = 0; i < l.size; i++)
+	{
+		for(int j = 0; j < l.previous_layer_size; j++)
+		{
+			os.write((char*)&l.WEIGHTS(i,j), sizeof(double));
+		}
+	}
+	for(int i = 0; i < l.size; i++)
+	{
+		os.write((char*)&l.BIASES(i), sizeof(double));
+	}
+	return os;
+}
+
+
+std::istream& operator>>(std::istream& is, Layer& l)
+{
+	is.read((char*)&l.size, sizeof(int));
+	is.read((char*)&l.previous_layer_size, sizeof(int));
+	l.WEIGHTS.resize(l.size, l.previous_layer_size);
+	l.BIASES.resize(l.size, 1);
+	l.Z_VALUES = VectorXd::Zero(l.size, 1);
+	l.ACTIVATION_VALUES = VectorXd::Zero(l.size, 1);
+
+	for(int i = 0; i < l.size; i++)
+	{
+		for(int j = 0; j < l.previous_layer_size; j++)
+		{
+			is.read((char*)&l.WEIGHTS(i,j), sizeof(double));
+		}
+	}
+	for(int i = 0; i < l.size; i++)
+	{
+		is.read((char*)&l.BIASES(i), sizeof(double));
+	}
+	return is;
 }
 
 double Layer::sigmoid(double x)

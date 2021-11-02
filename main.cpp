@@ -3,6 +3,7 @@
 #include <vector>
 #include <fstream>
 
+#include "NetworkSave.h"
 #include "MNISTReader.h"
 #include "FFNeuralNetwork.h"
 
@@ -46,13 +47,16 @@ int main()
     // Here the input layer will have 28*28 (784) inputs
     // then the first hidden layer will have 128, the second 128, etc
     // and finally the output layer will have 10 outputs
-    vector<int> layers = {28*28, 128, 128, 128, 64, 64, 32, 32, 10};
+//vector<int> layers = {28*28, 128, 128, 128, 64, 64, 32, 32, 10};
     // initialisaton of the network using our defined layers
-    FFNeuralNetwork nn(layers);  
+//FFNeuralNetwork nn(layers);  
+    FFNeuralNetwork nn;
+    NetworkSave s("");
+    s.load(nn);
 
     // counters for good guess and total trainings
     int good = 0;
-    int numb = 1000000;
+    int numb = 10000;
 
     for(int i = 0; i < numb; i++)
     {
@@ -68,7 +72,7 @@ int main()
         if(i%1000 == 0)
         {
             stats << i << "," << good << "," << numb << endl;
-            //cout << i << endl;
+            cout << i << endl;
         }
     }
     stats << numb << "," << good << "," << numb << endl;
@@ -79,7 +83,11 @@ int main()
 
     // close the file 
     stats.close();
+    
+    s.save(nn);
 
-    std::cout << std::endl;
+    cout << "Sauvegarde" << endl;
+
+    std::cout << "goodbye" << std::endl;
     return EXIT_SUCCESS;
 }
