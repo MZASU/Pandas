@@ -36,6 +36,7 @@ public:
     // gets as input the array of the previous layer's activation function 
     void forwardPass(VectorXd values);
 
+    // save and load operators
     friend std::ostream& operator<<(std::ostream& os, const Layer& l);
     friend std::istream& operator>>(std::istream& is, Layer& l);
 };

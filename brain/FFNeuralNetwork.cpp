@@ -161,21 +161,24 @@ vector<VectorXd> FFNeuralNetwork::calculateError(VectorXd ex)
 
 std::ostream& operator<<(std::ostream& os, const FFNeuralNetwork& nn)
 {
+    // We save the network according to the structure 
+    // in the file networksave.cpp // got to this file for more details
     os.write((char*)&nn.learning_rate, sizeof(double));
     os.write((char*)&nn.input_size, sizeof(int));
-    int tmp = nn.layers.size();
+    int tmp = nn.layers.size();             // i'm 99% sure there is a way to not need a tmp variable, but i compile the thing with -O3, i hope it fixes it for me tbh
     os.write((char*)&tmp, sizeof(int));
     for(int i = 0; i < tmp; i++)
     {
         int _tmp = sizeof(nn.layers.at(i));
         os.write((char*)&_tmp, sizeof(int));
-        os << nn.layers.at(i);
+        os << nn.layers.at(i);                  // I overloaded the layer class in order for this loop to be cleaner
     }
     return os;
 }
 
 std::istream& operator>>(std::istream& is, FFNeuralNetwork& nn)
 {
+    // same as above the sdrawkcab
     is.read((char*)&nn.learning_rate, sizeof(double));
     is.read((char*)&nn.input_size, sizeof(int));
     int ls = 0;
@@ -187,7 +190,7 @@ std::istream& operator>>(std::istream& is, FFNeuralNetwork& nn)
         int _tmp = 0;
         is.read((char*)&_tmp, sizeof(int));
         assert(_tmp > 0);
-        Layer l;
+        Layer l;            // The line i talk about in the layer.cpp defualt contructor comments. since to my knowledge their is no way around it
         is >> l;
         nn.layers.at(i) = l;
     }

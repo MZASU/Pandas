@@ -54,6 +54,10 @@ void Layer::forwardPass(VectorXd in)
 
 std::ostream& operator<<(std::ostream& os, const Layer& l)
 {
+	// this function saves the layer in a file according to the structure detailed
+	// in NetworkSave.cpp		// go to this file for more details
+	// It uses the write function in order to write the actual value on the file 
+	// and not an ascii char* of the value
 	os.write((char*)&l.size, sizeof(int));
 	os.write((char*)&l.previous_layer_size, sizeof(int));
 	for(int i = 0; i < l.size; i++)
@@ -67,16 +71,31 @@ std::ostream& operator<<(std::ostream& os, const Layer& l)
 	{
 		os.write((char*)&l.BIASES(i), sizeof(double));
 	}
+	// The program doens't need to save Z_VALUES and ACTIVATION_VALUES
+	// since thoses are calculated when inputting a value
+	// so even if we did save them they would be instantally overwritten
+	// when calling NeuralNetwork::input(vector)
+	// and since we have no reason to need the z & activation values of the previous try
+	// It saves us a good amount of disk space.
 	return os;
 }
 
 
 std::istream& operator>>(std::istream& is, Layer& l)
 {
+	// this function loads the layer from a file according to the structure detailed
+	// in NetworkSave.cpp		// go to this file for more details
+	// It uses the write function in order to read the actual value on the file 
+	// and not an ascii char* of the value
 	is.read((char*)&l.size, sizeof(int));
 	is.read((char*)&l.previous_layer_size, sizeof(int));
+	// We set the sizes of the Matrices here because the default constructor 
+	// does not initialize them since we can not give it any info when
+	// creating the layer objet
 	l.WEIGHTS.resize(l.size, l.previous_layer_size);
 	l.BIASES.resize(l.size, 1);
+	// we did not save thoses two matrices so we just set their size
+	// and fill them with zeros
 	l.Z_VALUES = VectorXd::Zero(l.size, 1);
 	l.ACTIVATION_VALUES = VectorXd::Zero(l.size, 1);
 
