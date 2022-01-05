@@ -22,8 +22,8 @@ int main()
     cout << "Welcome to Pandas!" << endl;
 
     // to save the progress of the network
-    //ofstream stats;
-    //stats.open("stats.csv", ifstream::trunc);
+    ofstream stats;
+    stats.open("stats.csv", ifstream::trunc);
     
     // the files are in the same dir
     MNISTReader f("");
@@ -56,7 +56,7 @@ int main()
 
     // counters for good guess and total trainings
     int good = 0;
-    int numb = 1000000;
+    int numb = 100000;
 
     for(int i = 0; i < numb; i++)
     {
@@ -69,11 +69,11 @@ int main()
         // train the network according to the correct answer
         nn.train(f.label);
         // save stats and display current state of training
-        /*if(i%1000 == 0)
+        if(i%1000 == 0)
         {
             stats << i << "," << good << "," << numb << endl;
-            cout << i << endl;
-        }*/
+            //cout << i << endl;
+        }
     }
     //stats << numb << "," << good << "," << numb << endl;
 
@@ -82,8 +82,8 @@ int main()
     cout << good << "/" << numb << "(" << (good/(numb*1.0f))*100.0f << ")" << endl;
 
     // close the file 
-    //stats.close();
-    
+    stats.close();
+
     s.save(nn);
 
     cout << "Sauvegarde" << endl;
